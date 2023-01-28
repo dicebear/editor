@@ -1,47 +1,72 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { computed, watchEffect } from "vue";
+import { useI18n } from "vue-i18n";
+import Preview from "./components/Preview.vue";
+import Options from "./components/Options.vue";
+import useMainStore from "./stores/main";
+import tinycolor from "tinycolor2";
+import Header from "./components/Header.vue";
+
+const i18n = useI18n();
+const store = useMainStore();
+
+const backgroundColor = computed(() =>
+  tinycolor(`#${store.selectedStyleOptions.backgroundColor}`)
+);
+
+const backgroundColorStart = computed(() =>
+  backgroundColor.value.darken(10).toHexString()
+);
+
+const backgroundColorEnd = computed(() =>
+  backgroundColor.value.darken(6).toHexString()
+);
+
+watchEffect(() => (document.documentElement.lang = i18n.locale.value));
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <div class="app">
+    <div class="app-header">
+      <Header />
     </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+    <div class="app-preview">
+      <Preview />
+    </div>
+    <div class="app-options">
+      <Options />
+    </div>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+<style scoped lang="scss">
+.app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: v-bind("backgroundColorStart");
+  background: linear-gradient(
+    0deg,
+    v-bind("backgroundColorStart") 50%,
+    v-bind("backgroundColorEnd") 100%
+  );
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+  &-header,
+  &-preview,
+  &-options {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
   }
 
-  .logo {
-    margin: 0 2rem 0 0;
+  &-header {
+    padding: 0 20px;
+    max-width: 1000px;
   }
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
+  &-options {
+    flex-grow: 1;
+    overflow: hidden;
   }
 }
 </style>
