@@ -6,7 +6,9 @@ export default function getAvatarOptions(
   styleName: string,
   options: SelectedStyleOptions
 ): Record<string, unknown> {
-  const result: StyleOptions<any> = {};
+  const result: StyleOptions<any> = {
+    size: 512,
+  };
 
   const configStyleOptions = styleCollection[styleName].options;
 
