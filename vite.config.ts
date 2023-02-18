@@ -8,8 +8,9 @@ import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
 import Components from "unplugin-vue-components/vite";
 import { VantResolver } from "unplugin-vue-components/resolvers";
 
-const commitHash =
-  process.env.GIT_REV ?? execSync("git rev-parse --short HEAD").toString();
+const commitHash = (
+  process.env.GIT_REV ?? execSync("git rev-parse --short HEAD").toString()
+).slice(0, 7);
 
 // https://vitejs.dev/config/
 export default defineConfig({
