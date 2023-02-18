@@ -1,5 +1,9 @@
 # DiceBear Editor (Beta)
 
+[![Preview](./preview.png)](https://editor.dicebear.com)
+
+Read more about the project here: [https://github.com/dicebear/dicebear/discussions/286](https://github.com/dicebear/dicebear/discussions/286)
+
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
